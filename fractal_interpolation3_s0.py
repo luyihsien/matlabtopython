@@ -1,5 +1,5 @@
 import numpy as np
-    
+import sita
 def fractal_interpolation3_s0(z = None): 
     s = np.array([[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]])
     alpha0 = np.array([[0.8,0.8,0.8,0.8],[0.8,0.8,0.8,0.8],[0.8,0.8,0.8,0.8],[0.8,0.8,0.8,0.8]])
@@ -15,13 +15,13 @@ def fractal_interpolation3_s0(z = None):
     y = np.arange(1,N+0.5,0.5)
     m,n = z.shape
     ppp = m
-    for p in np.arange(1,kk+1).reshape(-1):
-        for i in np.arange(1,n - 1+1).reshape(-1):
-            for k in np.arange(1,4+1).reshape(-1):
-                for j in np.arange(1,m - 1+1).reshape(-1):
-                    a = (x(i + 1) - x(i)) / (x(4 * int(np.floor((i - 1) / 4)) + 5) - x(4 * int(np.floor((i - 1) / 4)) + 1))
-                    b = (x(4 * int(np.floor((i - 1) / 4)) + 5) * x(i) - x(4 * int(np.floor((i - 1) / 4)) + 1) * x(i + 1)) / (x(4 * int(np.floor((i - 1) / 4)) + 5) - x(4 * int(np.floor((i - 1) / 4)) + 1))
-                    c = (y(j + 1) - y(j)) / (y(4 * int(np.floor((j - 1) / 4)) + 5) - y(4 * int(np.floor((j - 1) / 4)) + 1))
+    for p in np.arange(0,kk).reshape(-1):
+        for i in np.arange(0,n - 1).reshape(-1):
+            for k in np.arange(0,4).reshape(-1):
+                for j in np.arange(0,m - 1).reshape(-1):
+                    a = (x[i + 1] - x[i]) / (x[4 * int(np.floor((i) / 4)) + 4] - x[4 * int(np.floor((i) / 4))])
+                    b = (x[4 * int(np.floor((i) / 4)) + 4] * x[i] - x[4 * int(np.floor((i) / 4))] * x[i + 1]) / (x(4 * int(np.floor((i - 1) / 4)) + 5) - x[4 * int(np.floor((i) / 4)) ])
+                    c = (y[j + 1] - y[j]) / (y[4 * int(np.floor((j) / 4)) + 4] - y[4 * int(np.floor((j) / 4))])
                     d = (y(4 * int(np.floor((j - 1) / 4)) + 5) * y(j) - y(4 * int(np.floor((j - 1) / 4)) + 1) * y(j + 1)) / (y(4 * int(np.floor((j - 1) / 4)) + 5) - y(4 * int(np.floor((j - 1) / 4)) + 1))
                     for t in np.arange(1,4+1).reshape(-1):
                         sita(k,x,n)

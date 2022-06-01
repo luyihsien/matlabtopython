@@ -1,5 +1,5 @@
 import numpy as np
-    
+import sita
 def fractal_interpolation3(z = None): 
     #FRACTAL_INTERPOLATION Summary of this function goes here
     
