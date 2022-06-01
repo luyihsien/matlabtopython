@@ -1,5 +1,5 @@
 import numpy as np
-    
+import sita,eta,dx,dy
 def fractal_interpolation2_s0(z = None): 
     s = np.array([[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]])
     alpha0 = np.array([[0.8,0.8,0.8,0.8],[0.8,0.8,0.8,0.8],[0.8,0.8,0.8,0.8],[0.8,0.8,0.8,0.8]])
@@ -19,7 +19,7 @@ def fractal_interpolation2_s0(z = None):
         for i in np.arange(1,n - 1+1).reshape(-1):
             for k in np.arange(1,4+1).reshape(-1):
                 for j in np.arange(1,m - 1+1).reshape(-1):
-                    a = (x(i + 1) - x(i)) / (x(4 * int(np.floor((i - 1) / 4)) + 5) - x(4 * int(np.floor((i - 1) / 4)) + 1))
+                    a = (x[i + 1] - x[i]) / (x[4 * int(np.floor((i - 1) / 4)) + 5] - x[4 * int(np.floor((i - 1) / 4)) + 1])
                     b = (x(4 * int(np.floor((i - 1) / 4)) + 5) * x(i) - x(4 * int(np.floor((i - 1) / 4)) + 1) * x(i + 1)) / (x(4 * int(np.floor((i - 1) / 4)) + 5) - x(4 * int(np.floor((i - 1) / 4)) + 1))
                     c = (y(j + 1) - y(j)) / (y(4 * int(np.floor((j - 1) / 4)) + 5) - y(4 * int(np.floor((j - 1) / 4)) + 1))
                     d = (y(4 * int(np.floor((j - 1) / 4)) + 5) * y(j) - y(4 * int(np.floor((j - 1) / 4)) + 1) * y(j + 1)) / (y(4 * int(np.floor((j - 1) / 4)) + 5) - y(4 * int(np.floor((j - 1) / 4)) + 1))
@@ -29,7 +29,7 @@ def fractal_interpolation2_s0(z = None):
                         dx(i,j,x,ppp,z)
                         dy(i,j,y,ppp,z)
                         # sss=dx(k,t,x,ppp,z)-dy(k,t,y,ppp,z);
-                        a00 = ((1 - sita(k,x,n)) ** 2 * (alpha0(i,j) + sita(k,x,n) * gama0(i,j)) * (1 - eta(t,y,m)) ** 2 * (alpha(i,j) + eta(t,y,m) * gama(i,j))) / (((1 - sita(k,x,n)) ** 2 * alpha0(i,j) + sita(k,x,n) * (1 - sita(k,x,n)) * gama0(i,j) + sita(k,x,n) ** 2 * beta0(i,j)) * ((1 - eta(t,y,m)) ** 2 * alpha(i,j) + eta(t,y,m) * (1 - eta(t,y,m)) * gama(i,j) + eta(t,y,m) ** 2 * beta(i,j)))
+                        a00 = ((1 - sita(k,x,n)) ** 2 * (alpha0[i,j] + sita(k,x,n) * gama0(i,j)) *(1 - eta(t,y,m)) ** 2 * (alpha(i,j) + eta(t,y,m) * gama(i,j))) / (((1 - sita(k,x,n)) ** 2 * alpha0(i,j) + sita(k,x,n) * (1 - sita(k,x,n)) * gama0(i,j) + sita(k,x,n) ** 2 * beta0(i,j)) * ((1 - eta(t,y,m)) ** 2 * alpha(i,j) + eta(t,y,m) * (1 - eta(t,y,m)) * gama(i,j) + eta(t,y,m) ** 2 * beta(i,j)))
                         a01 = ((1 - sita(k,x,n)) ** 2 * (alpha0(i,j) + sita(k,x,n) * gama0(i,j)) * eta(t,y,m) ** 2 * (beta(i,j) + (1 - eta(t,y,m)) * gama(i,j))) / (((1 - sita(k,x,n)) ** 2 * alpha0(i,j) + sita(k,x,n) * (1 - sita(k,x,n)) * gama0(i,j) + sita(k,x,n) ** 2 * beta0(i,j)) * ((1 - eta(t,y,m)) ** 2 * alpha(i,j) + eta(t,y,m) * (1 - eta(t,y,m)) * gama(i,j) + eta(t,y,m) ** 2 * beta(i,j)))
                         a10 = (sita(k,x,n) ** 2 * (beta0(i,j) + (1 - sita(k,x,n)) * gama0(i,j)) * (1 - eta(t,y,m)) ** 2 * (alpha(i,j) + eta(t,y,m) * gama(i,j))) / (((1 - sita(k,x,n)) ** 2 * alpha0(i,j) + sita(k,x,n) * (1 - sita(k,x,n)) * gama0(i,j) + sita(k,x,n) ** 2 * beta0(i,j)) * ((1 - eta(t,y,m)) ** 2 * alpha(i,j) + eta(t,y,m) * (1 - eta(t,y,m)) * gama(i,j) + eta(t,y,m) ** 2 * beta(i,j)))
                         a11 = (sita(k,x,n) ** 2 * (beta0(i,j) + (1 - sita(k,x,n)) * gama0(i,j)) * (eta(t,y,m)) ** 2 * (beta(i,j) + (1 - eta(t,y,m)) * gama(i,j))) / (((1 - sita(k,x,n)) ** 2 * alpha0(i,j) + sita(k,x,n) * (1 - sita(k,x,n)) * gama0(i,j) + sita(k,x,n) ** 2 * beta0(i,j)) * ((1 - eta(t,y,m)) ** 2 * alpha(i,j) + eta(t,y,m) * (1 - eta(t,y,m)) * gama(i,j) + eta(t,y,m) ** 2 * beta(i,j)))
@@ -63,10 +63,13 @@ def fractal_interpolation2_s0(z = None):
                 c10 = (eta(j,y,m) * (1 - eta(j,y,m)) ** 2 * alpha(n - 1,i)) / ((1 - eta(j,y,m)) ** 2 * alpha(n - 1,i) + eta(j,y,m) * (1 - eta(j,y,m)) * gama(n - 1,i) + eta(j,y,m) ** 2 * beta(n - 1,i))
                 c11 = - ((1 - eta(j,y,m)) * eta(j,y,m) ** 2 * beta(n - 1,i)) / ((1 - eta(j,y,m)) ** 2 * alpha(n - 1,i) + eta(j,y,m) * (1 - eta(j,y,m)) * gama(n - 1,i) + eta(j,y,m) ** 2 * beta(n - 1,i))
                 zzy[[i - 1] * 4 + j] = s(n - 1,i) * zy(4 * int(np.floor((i - 1) / 4)) + j) + a00 * (zy(i) - s(n - 1,i) * zy(4 * int(np.floor((i - 1) / 4)) + 1)) + a01 * (zy(i + 1) - s(n - 1,i) * zy(4 * int(np.floor((i - 1) / 4)) + 5)) + c10 * ((y(i + 1) - y(i)) * dy(n,i,y,m,z) - s(n - 1,i) * (y(4 * int(np.floor((i - 1) / 4)) + 5) - y(4 * int(np.floor((i - 1) / 4)) + 1)) * dy(n,1,y,m,z)) + c11 * ((y(i + 1) - y(i)) * dy(n,i + 1,y,n,z) - s(n - 1,i) * (y(4 * int(np.floor((i - 1) / 4)) + 5) - y(4 * int(np.floor((i - 1) / 4)) + 1)) * dy(n,m,y,n,z))
-        zz = cat(2,zz,np.transpose(zzy))
-        tmp = cat(2,zzx,z(n,m))
-        zz = cat(1,zz,tmp)
-        xx = cat(2,xx,xx(4 * (m - 1)) + xx(2) - xx(1))
-        yy = cat(2,yy,yy(4 * (m - 1)) + yy(2) - yy(1))
+        zz=np.concatenate((zz,np.transpose(zzy)),1)
+        #zz = cat(2,zz,np.transpose(zzy)) #np.concatenate((a, b), axis=0)
+        tmp=np.concatenate((zzx,z(n,m)),1)#tmp = cat(2,zzx,z(n,m))
+        zz=np.concatenate((zz,tmp),0)#zz = cat(1,zz,tmp)
+        xx=np.concatenate((xx,xx(4 * (m - 1)) + xx(2) - xx(1)),1)
+        #xx = cat(2,xx,xx(4 * (m - 1)) + xx(2) - xx(1))
+        yy=np.concatenate((yy,yy(4 * (m - 1)) + yy(2) - yy(1)),1)
+        #yy = cat(2,yy,yy(4 * (m - 1)) + yy(2) - yy(1))
     
     return average_final
